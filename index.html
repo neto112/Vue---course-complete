@@ -17,8 +17,9 @@
   </header>
   <section id="events">
     <h2>Events in Action</h2>
-    <button @click.middle="add(5)">Add</button>
+    <button @click="add(5)">Add</button>
     <button @click="reduce(5)">Remove</button>
+    <p v-once>Starting Counter: {{counter}}</p>
     <p>Result: {{ counter }}</p>
     <input type="text" v-on:input="setName($event, 'Rasweiler')" v-on:keyup:enter="confirmInput">
     <p>Your Name: {{ confirmedName }}</p>
