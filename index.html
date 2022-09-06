@@ -13,20 +13,17 @@
 
 <body>
   <header>
-    <h1>Vue Events</h1>
+    <h1>Events</h1>
   </header>
-  <section id="events">
-    <h2>Events in Action</h2>
-    <button @click="add(5)">Add</button>
-    <button @click="reduce(5)">Remove</button>
-    <p v-once>Starting Counter: {{counter}}</p>
-    <p>Result: {{ counter }}</p>
-    <input type="text" v-on:input="setName($event, 'Rasweiler')" v-on:keyup:enter="confirmInput">
-    <p>Your Name: {{ confirmedName }}</p>
-    <form v-on:submit.prevent="submitForm">
-      <input type="text">
-      <button>Sign up</button>
-    </form>
+  <section id="assignment">
+    <h2>Event Practice</h2>
+    <button @click="submitForm()">Show Alert</button>
+    <hr />
+    <input type="text" v-on:keydown="saveInput" />
+    <p>{{userInput}}</p>
+    <hr />
+    <input type="text" v-on:keydown="saveInput" v-on:keyup:enter="confirmInput" />
+    <p>{{confirmedInput}}</p>
   </section>
 </body>
 
