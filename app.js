@@ -1,21 +1,32 @@
 const app = Vue.createApp({
   data() {
     return {
-      userInput: "",
-      confirmedInput: "",
-    }
+      counter: 10,
+      name: '',
+      confirmedName: ''
+    };
   },
   methods: {
-    submitForm() {
-      alert('Ok')
-    },
-    saveInput(event) {
-      this.userInput = event.target.value
-    },
     confirmInput() {
-      this.confirmedInput = this.userInput;
+      this.confirmedName = this.name;
     },
+    submitForm(event) {
+      event.preventDefault();
+      alert('Submitted!')
+    },
+    setName(event) {
+      this.name = event.target.value;
+    },
+    add(num) {
+      this.counter = this.counter +num;
+    },
+    reduce(num) {
+      this.counter = this.counter - num;
+    },
+    resetInput() {
+      this.name = "";
+    }
   }
-})
+});
 
-app.mount('#assignment')
+app.mount('#events');
