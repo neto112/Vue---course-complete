@@ -3,12 +3,14 @@ const app = Vue.createApp({
     return {
       counter: 10,
       name: '',
-      confirmedName: ''
     };
   },
   methods: {
-    confirmInput() {
-      this.confirmedName = this.name;
+    outputFullname() {
+      if (this.name === '') {
+        return '';
+      }
+      return this.name + ' ' + ' Rasweiler '
     },
     submitForm(event) {
       event.preventDefault();
