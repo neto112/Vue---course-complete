@@ -1,18 +1,25 @@
+function getRandomValue(min, max) {
+  Math.floor(Math.random() * (max - min)) + min;
+}
+
 const app = Vue.createApp({
   data() {
     return {
-      enteredGoalValue: '',
-      goals: [],
+      playerHealth: 100,
+      monsterHealth: 100,
     };
   },
   methods: {
-    addGoal() {
-      this.goals.push(this.enteredGoalValue)
+    attackMonster() {
+      const attackValue = getRandomValue(5, 12)
+      this.monsterHealth -= attackValue
+      this.attackPlayer();
     },
-    removeGoal(idx) {
-      this.goals.splice(idx, 1)
+    attackPlayer() {
+      const attackValue = getRandomValue(8, 15)
+      this.playerHealth -= attackValue
     }
   }
 });
 
-app.mount('#user-goals');
+app.mount('#game');
