@@ -14,13 +14,21 @@
   </head>
   <body>
     <header>
-      <h1>Vue Behind The Scenes</h1>
+      <h1>FriendList</h1>
     </header>
     <section id="app">
-      <h2>How Vue Works</h2>
-      <input type="text" ref="userText">
-      <button @click="setText">Set Text</button>
-      <p>{{ message }}</p>
+      <ul>
+        <li v-for="friend in friends" :key="friend.id">
+          <h2>{{ friend.name }}</h2>
+          <button @click="toggleDetails()">
+            {{ detailsAreVisible ? 'Hide' : 'Show' }} Details
+          </button>
+          <ul v-if="detailsAreVisible">
+            <li><strong>Phone:</strong> {{ friend.phone }}</li>
+            <li><strong>Email:</strong> {{ friend.email }}</li>
+          </ul>
+        </li>
+      </ul>
     </section>
   </body>
 </html>
