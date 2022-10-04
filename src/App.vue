@@ -3,21 +3,24 @@
     <TheHeader />
     <button @click="setSelectedComponent('active-goals')">Active Goals</button>
     <button @click="setSelectedComponent('manage-goals')">Manage Goals</button>
-    <ActiveGoals v-if="selectedComponent === 'active-goals'" />
-    <ManageGoals v-if="selectedComponent === 'manage-goals'"/>
+    <!-- <ActiveGoals v-if="selectedComponent === 'active-goals'" /> -->
+    <!-- <ManageGoals v-if="selectedComponent === 'manage-goals'"/> -->
+    <keep-alive>
+      <component :is="selectedComponent"></component>
+    </keep-alive>
   </div>
 </template>
 
 <script>
 import TheHeader from "./components/TheHeader.vue";
-import ActiveGoals from "./components/ActiveGoals.vue";
-import ManageGoals from "./components/ManageGoals.vue";
+// import ActiveGoals from "./components/ActiveGoals.vue";
+// import ManageGoals from "./components/ManageGoals.vue";
 
 export default {
   components: {
     TheHeader,
-    ActiveGoals,
-    ManageGoals,
+    // ActiveGoals,
+    // ManageGoals,
   },
   data() {
     return {
