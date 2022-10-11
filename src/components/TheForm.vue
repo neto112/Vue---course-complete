@@ -60,6 +60,9 @@
       </div>
     </div>
     <div class="form-control">
+      <rating-control></rating-control>
+    </div>
+    <div class="form-control">
       <input type="checkbox" id="confirm-terms" name="confirm-terms" v-model="confirm" />
       <label for="confirm-terms">Agree to terms of use?</label>
     </div>
@@ -70,7 +73,12 @@
 </template>
 
 <script>
+import RatingControl from './RatingControl.vue';
+
 export default {
+  components: {
+    RatingControl
+  },
   data() {
     return {
       userName: '',
@@ -84,11 +92,23 @@ export default {
   },
   methods: {
     submitForm() {
+      console.log('Username: ' + this.userName);
       this.userName = '';
+      console.log('User age:');
+      console.log(this.userAge + 5);
+      console.log(this.$refs.ageInput.value + 5);
+      console.log(31);
       this.userAge = null;
+      console.log('Referrer: ' + this.referrer);
       this.referrer = 'wom';
+      console.log('Checkboxes');
+      console.log(this.interest);
+      console.log('Radio buttons');
+      console.log(this.how);
       this.interest = [];
       this.how = null;
+      console.log('Confirm?');
+      console.log(this.confirm);
       this.confirm = false;
     },
     validateInput() {
