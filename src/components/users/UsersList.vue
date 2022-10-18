@@ -1,5 +1,5 @@
 <template>
-  <button @click="confirmInput"></button>
+  <button @click="confirmInput">Confirm</button>
   <ul>
     <user-item v-for="user in users" :key="user.id" :name="user.fullName" :role="user.role"></user-item>
   </ul>
