@@ -1,28 +1,55 @@
 <template>
   <button @click="confirmInput">Confirm</button>
+  <button @click="saveChanges">Save Changes</button>
   <ul>
-    <user-item v-for="user in users" :key="user.id" :name="user.fullName" :role="user.role"></user-item>
+    <user-item
+      v-for="user in users"
+      :key="user.id"
+      :name="user.fullName"
+      :role="user.role"
+    ></user-item>
   </ul>
 </template>
 
 <script>
-import UserItem from './UserItem.vue';
+import UserItem from "./UserItem.vue";
 
 export default {
   components: {
     UserItem,
   },
-  inject: ['users'],
+  inject: ["users"],
+  data() {
+    return {
+      changesSave: false,
+    };
+  },
   methods: {
     confirmInput() {
-      this.$router.push('./teams');
-    }
+      this.$router.push("./teams");
+    },
+    saveChanges() {
+      this.changesSave = true;
+    },
   },
   beforeRouteEnter(to, from, next) {
-    console.log('UsersList Cmp beforeRouteEnter');
+    console.log("UsersList Cmp beforeRouteEnter");
     console.log(to, from);
-    next()
-  }
+    next();
+  },
+  beforeRouteLeave(to, from, next) {
+    console.log("UsersList Cmp beforeRouteLeave");
+    console.log(to, from);
+    if (this.changesSave) {
+      next();
+    } else {
+      const userWantsToLeave = confirm('Are you sure? You got unsaved changes!');
+      next(userWantsToLeave)
+    }
+  },
+  unmounted() {
+    console.log("unmounted");
+  },
 };
 </script>
 
