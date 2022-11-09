@@ -31,6 +31,11 @@ const router = createRouter({
       components: {
         default: UsersList,
         footer: UsersFooter
+      },
+      beforeEnter(to, from, next) {
+        console.log('users beforeEnter');
+        console.log(to, from);
+        next()
       }
     },
     { path: '/:notFound(.*)', component: NotFound }
@@ -45,8 +50,8 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  console.log('Global beforeEach');
-  console.log(to, "***", from);
+  // console.log('Global beforeEach');
+  // console.log(to, "***", from);
   // if (to.name === 'team-members') {
   //   ne xt();
   // } else {

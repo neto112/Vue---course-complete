@@ -17,6 +17,11 @@ export default {
     confirmInput() {
       this.$router.push('./teams');
     }
+  },
+  beforeRouteEnter(to, from, next) {
+    console.log('UsersList Cmp beforeRouteEnter');
+    console.log(to, from);
+    next()
   }
 };
 </script>
