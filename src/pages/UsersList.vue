@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import UserItem from "./UserItem.vue";
+import UserItem from "../components/users/UserItem.vue";
 
 export default {
   components: {
