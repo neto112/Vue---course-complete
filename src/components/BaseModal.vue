@@ -34,5 +34,18 @@ dialog {
   background-color: white;
   z-index: 100;
   border: none;
+  animation: modal 0.3s ease-out forwards;
+}
+
+@keyframes modal {
+  from {
+    opacity: 0;
+    transform: translateY(-50px) scale(0.9);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(0.9);
+  }
 }
 </style>
