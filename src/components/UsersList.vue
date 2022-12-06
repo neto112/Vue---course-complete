@@ -1,11 +1,7 @@
 <template>
-  <ul>
-    <transition-group tag="ul" name="user-list">
-      <li v-for="user in users" :key="user" @click="removeUser(user)">
-        {{ user }}
-      </li>
-    </transition-group>
-  </ul>
+  <transition-group tag="ul" name="user-list">
+    <li v-for="user in users" :key="user" @click="removeUser(user)">{{ user }}</li>
+  </transition-group>
   <div>
     <input type="text" ref="userNameInput" />
     <button @click="addUser">Add User</button>
@@ -16,7 +12,7 @@
 export default {
   data() {
     return {
-      users: ["Max", "Manu"],
+      users: ['Max', 'Manu', 'Julie', 'Angela', 'Michael'],
     };
   },
   methods: {
@@ -60,6 +56,7 @@ li {
 
 .user-list-leave-active {
   transition: all 1s ease-in;
+  position: absolute;
 }
 
 .user-list-leave-to {
