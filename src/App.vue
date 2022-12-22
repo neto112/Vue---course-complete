@@ -1,42 +1,26 @@
 <template>
-  <base-container title="Vuex" v-if="isAuth">
-    <the-counter></the-counter>
-    <favorite-value></favorite-value>
-    <button @click="addOne">Add 10</button>
-    <change-counter></change-counter>
-  </base-container>
-  <base-container title="Auth">
-    <user-auth> </user-auth>
-  </base-container>
+  <the-header></the-header>
+  <router-view></router-view>
 </template>
 
 <script>
-import BaseContainer from "./components/BaseContainer.vue";
-import TheCounter from "./components/TheCounter.vue";
-import ChangeCounter from "./components/ChangeCounter.vue";
-import FavoriteValue from "./components/FavoriteValue.vue";
-import UserAuth from "./components/UserAuth.vue";
+import TheHeader from './components/nav/TheHeader.vue';
 
 export default {
   components: {
-    BaseContainer,
-    TheCounter,
-    ChangeCounter,
-    FavoriteValue,
-    UserAuth,
+    TheHeader
   },
-  computed: {
-    isAuth() {
-      return this.$store.getters.userIsAuthenticated;
-    },
+  data() {
+    return {
+      isLoggedIn: false, 
+    };
   },
   methods: {
-    addOne() {
-      // this.$store.dispatch('increase', { value: 10 });
-      this.$store.dispatch({
-        type: "numbers/increase",
-        value: 10,
-      });
+    login() {
+      this.isLoggedIn = true;
+    },
+    logout() {
+      this.isLoggedIn = false;
     },
   },
 };
