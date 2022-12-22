@@ -18,8 +18,8 @@
       </ul>
     </nav>
     <div>
-      <button v-if="!isLoggedIn" @login="login">Login</button>
-      <button v-if="isLoggedIn" @logout="logout">Logout</button>
+      <button v-if="!isLoggedIn" @click="login">Login</button>
+      <button v-if="isLoggedIn" @click="logout">Logout</button>
     </div>
   </header>
 </template>
@@ -29,6 +29,17 @@ export default {
   computed: {
     cartQuantity() {
       return this.$store.getters['cart/quantity'];
+    },
+    isLoggedIn() {
+      return this.$store.getters.isAuthenticated;
+    }
+  },
+  methods: {
+    login() {
+      this.$store.dispatch('login');
+    },
+    logout() {
+      this.$store.dispatch('logout');
     }
   }
 };
