@@ -28,7 +28,7 @@ export default {
   },
   async loadCoaches(context) {
     const response = await fetch(
-      `https://course-vue-7acae-default-rtdb.firebaseio.com//coaches.json`
+      `https://course-vue-7acae-default-rtdb.firebaseio.com/coaches.json`
     );
     const responseData = await response.json();
 
