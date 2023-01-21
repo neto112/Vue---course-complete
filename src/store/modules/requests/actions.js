@@ -27,7 +27,7 @@ export default {
     const responseData = await response.json();
 
     if (!response.ok) {
-      const error = new Error(responseData.message || 'Failed to send request.');
+      const error = new Error(responseData.message || 'Failed to fetch requests.');
       throw error;
     }
 
@@ -42,6 +42,7 @@ export default {
       };
       requests.push(request)
     }
+
     context.commit('setRequests', requests)
   }
 };
