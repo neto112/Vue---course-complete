@@ -1,4 +1,7 @@
 <template>
+  <base-dialog :show="!!error" title="An error occurred!" @close="handleError">
+    <p>{{ error }}</p>
+  </base-dialog>
   <section>
     <coach-filter @change-filter="setFilters"></coach-filter>
   </section>
@@ -6,7 +9,12 @@
     <base-card>
       <div class="controls">
         <base-button mode="outline" @click="loadCoaches">Refresh</base-button>
-        <base-button v-if="!isCoach" link to="/register">Register as Coach</base-button>
+        <base-button v-if="!isCoach" link to="/register"
+          >Register as Coach</base-button
+        >
+      </div>
+      <div v-if="isLoading">
+        <base-snipper></base-snipper>
       </div>
       <ul v-if="hasCoaches">
         <coach-item
@@ -25,8 +33,8 @@
 </template>
 
 <script>
-import CoachItem from '../../components/coaches/CoachItem.vue';
-import CoachFilter from '../../components/coaches/CoachFilter.vue';
+import CoachItem from "../../components/coaches/CoachItem.vue";
+import CoachFilter from "../../components/coaches/CoachFilter.vue";
 
 export default {
   components: {
@@ -35,6 +43,8 @@ export default {
   },
   data() {
     return {
+      isLoading: false,
+      error: null,
       activeFilters: {
         frontend: true,
         backend: true,
@@ -44,25 +54,25 @@ export default {
   },
   computed: {
     isCoach() {
-      return this.$store.getters['coaches/isCoach'];
+      return this.$store.getters["coaches/isCoach"];
     },
     filteredCoaches() {
-      const coaches = this.$store.getters['coaches/coaches'];
+      const coaches = this.$store.getters["coaches/coaches"];
       return coaches.filter((coach) => {
-        if (this.activeFilters.frontend && coach.areas.includes('frontend')) {
+        if (this.activeFilters.frontend && coach.areas.includes("frontend")) {
           return true;
         }
-        if (this.activeFilters.backend && coach.areas.includes('backend')) {
+        if (this.activeFilters.backend && coach.areas.includes("backend")) {
           return true;
         }
-        if (this.activeFilters.career && coach.areas.includes('career')) {
+        if (this.activeFilters.career && coach.areas.includes("career")) {
           return true;
         }
         return false;
       });
     },
     hasCoaches() {
-      return this.$store.getters['coaches/hasCoaches'];
+      return this.$store.getters["coaches/hasCoaches"];
     },
   },
   created() {
@@ -72,8 +82,17 @@ export default {
     setFilters(updatedFilters) {
       this.activeFilters = updatedFilters;
     },
-    loadCoaches() {
-      this.$store.dispatch('coaches/loadCoaches');
+    async loadCoaches() {
+      this.isLoading = true;
+      try {
+        await this.$store.dispatch("coaches/loadCoaches");
+      } catch (error) {
+        this.error = error.message || "Sometyhing went wrong!";
+      }
+      this.isLoading = false;
+    },
+    handleError() {
+      this.error = null;
     }
   },
 };
