@@ -7,7 +7,7 @@ export default {
     const response = await fetch(`https://course-vue-7acae-default-rtdb.firebaseio.com/requests/${payload.coachId}.json`, {
       method: 'POST',
       body: JSON.stringify(newRequest)
-    })
+    });
 
     const responseData = await response.json();
 
@@ -23,7 +23,7 @@ export default {
   },
   async fetchRequests(context) {
     const coachId = context.rootGetters.userId;
-    const response = fetch(`https://course-vue-7acae-default-rtdb.firebaseio.com/requests/${coachId}.json`)
+    const response = await fetch(`https://course-vue-7acae-default-rtdb.firebaseio.com/requests/${coachId}.json`);
     const responseData = await response.json();
 
     if (!response.ok) {
@@ -40,9 +40,9 @@ export default {
         userEmail: responseData[key].userEmail,
         message: responseData[key].message
       };
-      requests.push(request)
+      requests.push(request);
     }
 
-    context.commit('setRequests', requests)
+    context.commit('setRequests', requests);
   }
 };

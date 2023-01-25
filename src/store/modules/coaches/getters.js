@@ -16,6 +16,6 @@ export default {
       return true;
     }
     const currentTimeStamp = new Date().getTime();
-    return (currentTimeStamp - lastFetch) / 1000 > 60
+    return (currentTimeStamp - lastFetch) / 1000 > 60;
   }
 };
