@@ -15,10 +15,12 @@ export default {
   },
   async auth(context, payload) {
     const mode = payload.mode
-    let url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBd54EneJ3mjFGWWcMF4kprUvD0luHPiBo'
+    let url =
+      'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBvOcmh_Avvu08bFdUHdmJzA06c6vV4h0E';
 
     if (mode === 'signup') {
-      url = 'ttps://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBd54EneJ3mjFGWWcMF4kprUvD0luHPiBo'
+      url =
+        'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBvOcmh_Avvu08bFdUHdmJzA06c6vV4h0E';
     }
     const response = await fetch(url, {
       method: 'POST',
@@ -32,7 +34,9 @@ export default {
     const responseData = await response.json();
 
     if (!response.ok) {
-      const error = new Error(responseData.message || 'Failed to authenticate. Check your login data.');
+      const error = new Error(
+        responseData.message || 'Failed to authenticate. Check your login data.'
+      );
       throw error;
     }
 
@@ -51,7 +55,6 @@ export default {
     context.commit('setUser', {
       token: responseData.idToken,
       userId: responseData.localId,
-      tokenExpiration: expirationDate
     });
   },
   tryLogin(context) {
@@ -73,21 +76,19 @@ export default {
       context.commit('setUser', {
         token: token,
         userId: userId,
-        tokenExpiration: null
-      })
+      });
     }
   },
   logout(context) {
     localStorage.removeItem('token');
     localStorage.removeItem('userId');
-    localStorage.remove('tokenExpiration');
+    localStorage.removeItem('tokenExpiration')
 
     clearTimeout(timer);
 
     context.commit('setUser', {
       token: null,
       userId: null,
-      tokenExpiration: null,
     })
   },
   autoLogout(context) {
