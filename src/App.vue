@@ -1,63 +1,62 @@
 <template>
-  <h2>My Course Goal</h2>
-  <!-- Task 1: Output your main course goal with help of the composition API -->
-  <!-- Don't hardcode it into the template, instead hardcode it into the JS code -->
-  <div v-if="goalVisibility">{{ goal }}</div>
-  <!-- Task 2: Toggle (show/ hide) the goal with help of the button  -->
-  <button @click="toggleGoalVisibility">Toggle Goal</button>
-  <!-- Task 3: Manage data in three ways -->
-  <!-- => Separate refs -->
-  <!-- => Ref Object -->
-  <!-- => Reactive Object -->
-  <!-- Task 4: Also solve the assignment with the Options API -->
+  <section class="container">
+    <h2>{{ userName }}</h2>
+    <h3>{{ age }}</h3>
+    <button @click="setAge">Change Age</button>
+  </section>
 </template>
 
 <script>
-// import { reactive } from "vue";
-export default {
-  data() {
-    return {
-      goal: "Finish the course!",
-      goalVisibility: false,
-    };
-  },
-  methods: {
-    toggleGoalVisibility() {
-      this.goalVisibility = !this.goalVisibility;
-    },
-  },
-  // setup() {
-  // const courseGoal = ref("Finish the course!");
-  // const goalIsVisible = ref(false);
-  // const courseData = ref({
-  //   goal: 'Finish the course!',
-  //   goalVisibility: false
-  // })
-  // const courseData = reactive({
-  //   goal: "Finish the course!",
-  //   goalVisibility: false,
-  // });
+import { ref } from 'vue';
 
-  // function toggleGoalVisibility() {
-  //   // goalIsVisible.value = !goalIsVisible.value;
-  //   // courseData.value.goalVisibility = !courseData.value.goalVisibility;
-  //   courseData.goalVisibility = !courseData.goalVisibility;
-  // }
-  // return {
-  //   goal: courseData.goal,
-  //   courseData,
-  //   toggleGoalVisibility,
-  // };
+export default {
+  setup() {
+    const uName = ref('Maximilian');
+    const uAge = ref(31);
+    // const user = reactive({
+    //   name: 'Maximilian',
+    //   age: 31,
+    // });
+
+    function setNewAge() {
+      uAge.value = 33;
+    }
+
+    return { userName: uName, age: uAge, setAge: setNewAge };
+  },
+  // data() {
+  //   return {
+  //     userName: 'Maximilian',
+  //     age: 31
+  //   };
   // },
+  // methods: {
+  //   setNewAge() {
+  //     this.age = 32;
+  //   }
+  // }
 };
 </script>
 
 <style>
+* {
+  box-sizing: border-box;
+}
+
 html {
   font-family: sans-serif;
 }
+
 body {
-  margin: 3rem;
+  margin: 0;
+}
+
+.container {
+  margin: 3rem auto;
+  max-width: 30rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  padding: 1rem;
   text-align: center;
 }
 </style>
