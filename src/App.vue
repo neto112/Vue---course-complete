@@ -1,52 +1,56 @@
 <template>
-  <header>
-    <h1>Expense Tracker</h1>
-  </header>
-  <section>
-    <div>Available Funds: {{ availableFunds }}</div>
-    <div>Total Expenses: {{ currentExpenses }}</div>
-    <hr />
-    <div>Funds left: {{ remainingFunds }}</div>
-  </section>
-  <section>
-    <form @submit.prevent="addExpense">
-      <div>
-        <label for="amount">Amount</label>
-        <input id="amount" type="number" v-model="enteredExpense" />
-      </div>
-      <button>Add Expense</button>
-    </form>
+  <section class="container">
+    <user-data :first-name="firstName" :last-name="lastName" :age="age"></user-data>
+    <button @click="setAge">Change Age</button>
+    <div>
+      <input type="text" placeholder="First Name" v-model="firstName" />
+      <input type="text" placeholder="Last Name" ref="lastNameInput" />
+      <button @click="setLastName">Set Last Name</button>
+    </div>
   </section>
 </template>
 
 <script>
-import { ref, computed, watch } from "vue";
+import { ref, computed, watch } from 'vue';
+import UserData from './components/UserData.vue';
 
 export default {
+  components: {
+    UserData
+  },
   setup() {
-    const availableFunds = 100;
-    const currentExpenses = ref(0);
-    const enteredExpense = ref(0);
+    const firstName = ref('');
+    const lastName = ref('');
+    const lastNameInput = ref(null);
+    const uAge = ref(31);
 
-    const remainingFunds = computed(() => {
-      return availableFunds - currentExpenses.value;
+    const uName = computed(function() {
+      return firstName.value + ' ' + lastName.value;
     });
-    function addExpense() {
-      currentExpenses.value = currentExpenses.value + enteredExpense.value;
+
+     watch([uAge, uName], function(newValues, oldValues) {
+      console.log('Old age: ' + oldValues[0]);
+      console.log('New age: ' + newValues[0]);
+      console.log('Old name: ' + oldValues[1]);
+      console.log('New name: ' + newValues[1]);
+    });
+
+    function setNewAge() {
+      uAge.value = 33;
     }
 
-    watch(remainingFunds, (newValue) => {
-      if (newValue < 0) {
-        alert("You are broke!");
-      }
-    });
+    function setLastName() {
+      lastName.value = lastNameInput.value.value;
+    }
 
     return {
-      availableFunds,
-      currentExpenses,
-      enteredExpense,
-      remainingFunds,
-      addExpense,
+      userName: uName,
+      age: uAge,
+      setAge: setNewAge,
+      firstName,
+      lastName,
+      lastNameInput,
+      setLastName
     };
   },
 };
@@ -56,51 +60,21 @@ export default {
 * {
   box-sizing: border-box;
 }
+
 html {
   font-family: sans-serif;
 }
+
 body {
   margin: 0;
 }
-header {
-  width: 100%;
-  height: 5rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #30006e;
-  color: white;
-}
-section {
-  margin: 2rem auto;
-  max-width: 35rem;
-  padding: 1rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-  border-radius: 12px;
-}
 
-form div {
-  margin: 1rem 0;
-}
-input {
-  width: 100%;
-  padding: 0.15rem;
-}
-label {
-  font-weight: bold;
-  margin: 0.5rem 0;
-}
-button {
-  background-color: #30006e;
-  border: 1px solid #30006e;
-  font: inherit;
-  cursor: pointer;
-  padding: 0.5rem 1.5rem;
-  color: white;
-}
-button:hover,
-button:active {
-  background-color: #5819ac;
-  border-color: #5819ac;
+.container {
+  margin: 3rem auto;
+  max-width: 30rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  padding: 1rem;
+  text-align: center;
 }
 </style>
