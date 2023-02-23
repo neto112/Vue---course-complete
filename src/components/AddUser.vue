@@ -9,11 +9,14 @@
 </template>
 
 <script>
-import UserAlert from './UserAlert.vue'
+import UserAlert from './UserAlert.vue';
+
 import alertMixin from '../mixins/alert.js';
 
 export default {
-  components: { UserAlert },
+  components: {
+    UserAlert,
+  },
   mixins: [alertMixin],
 };
 </script>

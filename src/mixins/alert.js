@@ -1,7 +1,7 @@
 export default {
   data() {
     return {
-      alertIsVisible: false,
+      alertIsVisible: false
     };
   },
   methods: {
@@ -10,6 +10,6 @@ export default {
     },
     hideAlert() {
       this.alertIsVisible = false;
-    },
-  },
+    }
+  }
 };
